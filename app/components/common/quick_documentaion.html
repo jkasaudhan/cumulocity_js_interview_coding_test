@@ -1,0 +1,59 @@
+/*
+It is not mandatory to have this document but it can speed up the process and make life easier for other developer. We can have proper documentation of the guidelines or practices we are following during the development process but it would be quick to have a brief documentation of major ideas which should be considered while developing an application. For eg. 
+
+### Naming conventions used in the application
+- Controller names: camel case eg. LoginController
+- Folder and file names: lower case separated with underscore eg. login_controller.js, auth_service.js
+- Service names should be came case eg. AuthService
+
+### Widely resuable code snippet 
+- We have used base64 conversion directive to send image files to server
+  Ref: https://github.com/adonespitogo/angular-base64-upload
+    <form name="form">
+      <input type="file" ng-model="files" name="files" multiple accept="image/*, .zip" maxsize="5000" required base-sixty-four-input>
+      <span ng-show="form.files.$error.maxsize">Files must not exceed 5000 KB</span>
+    </form>
+*/
+
+### Requirement
+
+### The section below is only for demo: Create an alarm dashboard
+
+* Model
+ * Devices report alarms when something is wrong. 
+ * Alarms contain a timestamp, a severity, a text and the device that sent the alarm.
+* User interface 
+ * Show a list devices having the most severe (first priority sorting criterion), most recent active alarm (second priority sorting criterion).
+ * The list should show the name of the device and the most recent active alarm (date, text, severity)
+ * Bonus: Show only the most severe alarm for a device and group the others along with it.
+ * Bonus: Structuring, test cases, ...
+ 
+# API
+
+GET /alarm/alarms?pageSize=2000&resolved=false
+Host: demos.cumulocity.com
+Authorization: Basic ZWthdGVyaW5hOkthdGUwMTIzNA==
+
+HTTP/1.1 200 OK
+Content-Type: application/vnd.com.nsn.cumulocity.alarmCollection+json;ver=...
+Content-Length: ...
+
+{
+  "self" : "...",
+  "next" : "...",
+  "prev" : "...",
+  "alarms": [
+    {
+      "id" : "10",
+      "creationTime" : "2011-09-06T12:03:27.927Z",
+      "type" : "com_cumulocity_events_TamperEvent",
+      "time" : "2011-09-06T12:03:27.845Z",
+      "text" : "Tamper sensor triggered",
+      "status" : "ACTIVE",
+      "severity" : "MAJOR",
+      "source": { "id" : "12345", "name": "Enocean Sensor", "self" : "..." },
+      "count":1,
+      "history": { ... }
+    },
+    {...
+}

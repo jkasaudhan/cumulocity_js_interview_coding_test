@@ -1,0 +1,45 @@
+  <div class="panel panel-default">
+    <div class="panel-heading panel-head">
+      <div class="panel-title">
+        Notifications from various sources
+      </div>
+        
+      <div class="btn-group pull-right" data-toggle="buttons">
+        <label >
+          <input type="checkbox" ng-model="mostRecentFlag" ng-change="changeFilter()" > Most Recent &nbsp;&nbsp;
+        </label>
+        <label >
+        <select name="mySelect" 
+                ng-options="option.name for option in severityOptions.availableOptions track by option.id"
+                ng-model="severityOptions.selectedOption">
+        </select>
+        </label>
+       
+      </div>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in">
+      <div class="panel-body">  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>SN</th>
+        <th>Device Name</th>
+        <th>Type</th>
+        <th>Date</th>
+        <th>Severity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="alarm in alarmData | orderBy: alarmFilter.mostRecent | sortBySeverity: severityOptions.selectedOption.name">{{alarmFilter.mostSevere}}
+        <td>{{$index}}</td>
+        <td>{{alarm.text}}</td>
+        <td>{{alarm.type}}</td>
+        <td>{{formateDatetime(alarm.creationTime)}}</td>
+        <td>{{alarm.severity}}</td>
+      </tr>
+    
+    
+    </tbody>
+  </table>
+      </div>
+    </div>
+  </div>
